@@ -13,6 +13,12 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import Enquiries from "./pages/admin/Enquiries";
+import EnquiryForm from "./pages/admin/EnquiryForm";
+import Clients from "./pages/admin/Clients";
+import Staff from "./pages/admin/Staff";
+import Reports from "./pages/admin/Reports";
+import Setup from "./pages/admin/Setup";
 
 const queryClient = new QueryClient();
 
@@ -37,53 +43,35 @@ const App = () => (
               </AdminLayout>
             } />
             
-            {/* Placeholder Admin Routes */}
+            {/* Admin Routes */}
             <Route path="/admin/enquiries" element={
               <AdminLayout>
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Enquiries</h1>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </div>
+                <Enquiries />
               </AdminLayout>
             } />
             <Route path="/admin/enquiry-form" element={
               <AdminLayout>
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Enquiry Form</h1>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </div>
+                <EnquiryForm />
               </AdminLayout>
             } />
             <Route path="/admin/clients" element={
               <AdminLayout>
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Clients</h1>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </div>
+                <Clients />
               </AdminLayout>
             } />
             <Route path="/admin/staff" element={
               <AdminLayout>
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Staff</h1>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </div>
+                <Staff />
               </AdminLayout>
             } />
             <Route path="/admin/reports" element={
               <AdminLayout>
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Reports</h1>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </div>
+                <Reports />
               </AdminLayout>
             } />
             <Route path="/admin/setup" element={
               <AdminLayout>
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Setup</h1>
-                  <p className="text-muted-foreground">Coming soon...</p>
-                </div>
+                <Setup />
               </AdminLayout>
             } />
 
