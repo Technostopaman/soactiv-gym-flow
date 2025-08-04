@@ -14,16 +14,433 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance: {
+        Row: {
+          check_in: string | null
+          check_out: string | null
+          created_at: string
+          date: string
+          id: string
+          staff_id: string
+          updated_at: string
+          working_hours: number | null
+        }
+        Insert: {
+          check_in?: string | null
+          check_out?: string | null
+          created_at?: string
+          date?: string
+          id?: string
+          staff_id: string
+          updated_at?: string
+          working_hours?: number | null
+        }
+        Update: {
+          check_in?: string | null
+          check_out?: string | null
+          created_at?: string
+          date?: string
+          id?: string
+          staff_id?: string
+          updated_at?: string
+          working_hours?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          created_at: string
+          email: string | null
+          fee_status: Database["public"]["Enums"]["payment_status"] | null
+          full_name: string
+          id: string
+          is_active: boolean | null
+          joining_date: string
+          membership_type: string | null
+          phone: string | null
+          pt_trainer_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          fee_status?: Database["public"]["Enums"]["payment_status"] | null
+          full_name: string
+          id?: string
+          is_active?: boolean | null
+          joining_date?: string
+          membership_type?: string | null
+          phone?: string | null
+          pt_trainer_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          fee_status?: Database["public"]["Enums"]["payment_status"] | null
+          full_name?: string
+          id?: string
+          is_active?: boolean | null
+          joining_date?: string
+          membership_type?: string | null
+          phone?: string | null
+          pt_trainer_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clients_pt_trainer_id_fkey"
+            columns: ["pt_trainer_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enquiries: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          email: string | null
+          follow_up_date: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string
+          purpose: string | null
+          status: Database["public"]["Enums"]["enquiry_status"] | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          email?: string | null
+          follow_up_date?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone: string
+          purpose?: string | null
+          status?: Database["public"]["Enums"]["enquiry_status"] | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          email?: string | null
+          follow_up_date?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string
+          purpose?: string | null
+          status?: Database["public"]["Enums"]["enquiry_status"] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enquiries_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fees: {
+        Row: {
+          client_id: string
+          created_at: string
+          description: string | null
+          due_amount: number | null
+          id: string
+          paid_amount: number
+          payment_date: string | null
+          payment_status: Database["public"]["Enums"]["payment_status"] | null
+          total_fee: number
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          description?: string | null
+          due_amount?: number | null
+          id?: string
+          paid_amount?: number
+          payment_date?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"] | null
+          total_fee?: number
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          description?: string | null
+          due_amount?: number | null
+          id?: string
+          paid_amount?: number
+          payment_date?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"] | null
+          total_fee?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fees_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      memberships: {
+        Row: {
+          client_id: string
+          created_at: string
+          end_date: string
+          fee: number
+          id: string
+          membership_type: string
+          start_date: string
+          status: Database["public"]["Enums"]["membership_status"] | null
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          end_date: string
+          fee?: number
+          id?: string
+          membership_type: string
+          start_date?: string
+          status?: Database["public"]["Enums"]["membership_status"] | null
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          end_date?: string
+          fee?: number
+          id?: string
+          membership_type?: string
+          start_date?: string
+          status?: Database["public"]["Enums"]["membership_status"] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memberships_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pt_clients: {
+        Row: {
+          client_id: string
+          created_at: string
+          due_fee: number | null
+          end_date: string | null
+          id: string
+          is_active: boolean | null
+          paid_fee: number
+          sessions_completed: number
+          sessions_remaining: number | null
+          sessions_total: number
+          start_date: string
+          total_fee: number
+          trainer_id: string
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          due_fee?: number | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          paid_fee?: number
+          sessions_completed?: number
+          sessions_remaining?: number | null
+          sessions_total?: number
+          start_date?: string
+          total_fee?: number
+          trainer_id: string
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          due_fee?: number | null
+          end_date?: string | null
+          id?: string
+          is_active?: boolean | null
+          paid_fee?: number
+          sessions_completed?: number
+          sessions_remaining?: number | null
+          sessions_total?: number
+          start_date?: string
+          total_fee?: number
+          trainer_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pt_clients_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pt_clients_trainer_id_fkey"
+            columns: ["trainer_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      salaries: {
+        Row: {
+          created_at: string
+          id: string
+          month: string
+          paid_salary: number
+          payment_date: string | null
+          payment_status: Database["public"]["Enums"]["payment_status"] | null
+          staff_id: string
+          total_salary: number
+          updated_at: string
+          working_days: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          month: string
+          paid_salary?: number
+          payment_date?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"] | null
+          staff_id: string
+          total_salary?: number
+          updated_at?: string
+          working_days?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          month?: string
+          paid_salary?: number
+          payment_date?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"] | null
+          staff_id?: string
+          total_salary?: number
+          updated_at?: string
+          working_days?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "salaries_staff_id_fkey"
+            columns: ["staff_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staff: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          salary: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          salary?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          salary?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_current_user_role: {
+        Args: Record<PropertyKey, never>
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      enquiry_status: "pending" | "contacted" | "converted" | "closed"
+      membership_status: "active" | "expired" | "cancelled"
+      payment_status: "paid" | "unpaid" | "partial"
+      user_role: "admin" | "staff"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +567,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      enquiry_status: ["pending", "contacted", "converted", "closed"],
+      membership_status: ["active", "expired", "cancelled"],
+      payment_status: ["paid", "unpaid", "partial"],
+      user_role: ["admin", "staff"],
+    },
   },
 } as const
